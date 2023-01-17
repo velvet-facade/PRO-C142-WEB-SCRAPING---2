@@ -14,11 +14,11 @@ data = []
 
 star_table = soup.find_all("table")
 
-table_rows = star_table[7].find_all('tr')
+table_rows = star_table.find_all('tr')
 
 for i in table_rows:
     td = i.find_all('td')
-    row = i.text.strip()
+    row = [i.text.rstrip() for j in i]
 
     data.append(row)
 
@@ -28,11 +28,11 @@ radius = list()
 mass = list()
 distance = list()
 
-for i in data:
-    starName.append(data[2])
-    distance.append(data[4])
-    mass.append(data[6])
-    radius.append(data[7])
+for i in range(1, len(data)):
+    starName.append(data[i][1])
+    distance.append(data[i][3])
+    mass.append(data[i][5])
+    radius.append(data[i][6])
 
 star_df = pd.DataFrame(data, columns=headers)
 
